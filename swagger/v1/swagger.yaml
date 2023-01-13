@@ -1,0 +1,175 @@
+---
+openapi: 3.0.1
+info:
+  title: Documentation API V1
+  description: Sample app created for Medium article
+  version: v1
+paths:
+  "/api/v1/users":
+    get:
+      summary: List users
+      tags:
+      - Users
+      description: List all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+    post:
+      summary: Create a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '422':
+          description: Unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                description:
+                  type: string
+              required:
+              - email
+              - description
+        description: Create a user
+  "/api/v1/users/{id}":
+    get:
+      summary: Show a user
+      tags:
+      - Users
+      description: Show a user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: User identification
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+    put:
+      summary: Updates a user
+      tags:
+      - Users
+      description: Updates a user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: User identification
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                description:
+                  type: string
+              required:
+              - email
+              - description
+        description: Updates a user
+    delete:
+      summary: Delete a user
+      tags:
+      - Users
+      description: Delete a user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: User identification
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: OK
+        '404':
+          description: Not Found
+servers:
+- url: http://localhost:3000/
+  variables:
+    defaultHost:
+      default: localhost:3000
